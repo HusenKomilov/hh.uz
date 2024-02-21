@@ -27,7 +27,6 @@ class District(BaseModel):
 
 class Category(BaseModel):
     title = models.CharField(max_length=128)
-    parent = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True, related_name="children")
     slug = models.SlugField('self', max_length=128)
 
     def __str__(self):
@@ -65,7 +64,8 @@ class Vacancy(BaseModel):
     grafik = models.CharField(max_length=128, choices=choices.IshGRAFIGI.choices)
     edu = models.CharField(max_length=128, choices=choices.EDU.choices)
 
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="master")
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="category")
+    master = models.ForeignKey(MasterType, on_delete=models.CASCADE, related_name="master")
     region = models.ForeignKey(Region, on_delete=models.CASCADE, related_name="region")
     district = models.ForeignKey(District, on_delete=models.CASCADE, blank=True, null=True, related_name="district")
 

@@ -7,7 +7,8 @@ models = apps.get_models()
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'title', 'parent', 'slug')
+    list_display = ('pk', 'title', 'slug')
+    list_display_links = ('pk', 'title')
     prepopulated_fields = {'slug': ('title',), }
 
 
